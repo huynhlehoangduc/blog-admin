@@ -8,7 +8,9 @@ const routes: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
-    children: [],
+    children: [
+      { path: 'post-list', loadChildren: () => import('./pages/post/post-list/post-list.module').then(m => m.PostListModule) },
+    ],
     canActivate: [AdminGuard]
   },
   { path: '404', loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule) },
