@@ -1,0 +1,36 @@
+<div class='w-screen h-screen flex justify-center items-center relative'>
+    <div class='admin-login-screen-overlay absolute top-0 left-0 w-full h-full'></div>
+    <div class='bg-black bg-opacity-50 w-96 items-center h-80 flex justify-center shadow-xl p-5 rounded z-10'>
+        <form nz-form
+              [formGroup]='fm'
+              class='login-form'
+              (ngSubmit)='submitForm()'>
+            <h1 class='text-white text-center'>Login</h1>
+            <nz-form-item>
+                <nz-form-control nzErrorTip='Please input your email!'>
+                    <nz-input-group nzPrefixIcon='user'>
+                        <input type='text'
+                               nz-input
+                               formControlName='email'
+                               placeholder='Email' />
+                    </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control nzErrorTip='Please input your Password!'>
+                    <nz-input-group nzPrefixIcon='lock'>
+                        <input type='password'
+                               nz-input
+                               formControlName='password'
+                               placeholder='Password' />
+                    </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+            <button nz-button
+                    type='submit'
+                    class='login-form-button login-form-margin'
+                    [nzType]="'primary'">Log in
+            </button>
+        </form>
+    </div>
+</div>
