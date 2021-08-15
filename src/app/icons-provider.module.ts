@@ -7,7 +7,9 @@ import {
   LockOutline,
   MenuFoldOutline,
   MenuUnfoldOutline,
-  UserOutline
+  UserOutline,
+  DeleteOutline,
+  FileAddOutline,
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -16,7 +18,10 @@ const icons = [
   DashboardOutline,
   FormOutline,
   LockOutline,
-  UserOutline];
+  UserOutline,
+  DeleteOutline,
+  FileAddOutline,
+];
 
 @NgModule({
   imports: [NzIconModule],

@@ -1,1 +1,84 @@
-<p>post-list works!</p>
+<div class='mb-2'>
+    <a routerLink='/admin/post-edit'
+       nz-button
+       nzSize='default'
+       nzType='primary'>
+        <i nz-icon
+           nzType='file-add'
+           nzTheme='outline'></i>
+        Create Post
+    </a>
+</div>
+
+<nz-table
+    nzShowSizeChanger
+    [nzData]='posts'
+    [nzFrontPagination]='false'
+    [nzLoading]='loading'
+    [nzTotal]='total'
+    [nzPageSize]='pageSize'
+    [nzPageIndex]='pageIndex'
+    (nzQueryParams)='onQueryParamsChange($event)'
+>
+    <thead>
+    <tr>
+        <th nzColumnKey='actions'
+            style='width: 10rem; max-width: 10rem'>Actions
+        </th>
+        <th nzColumnKey='thumbnail'
+            style='width: 10rem; max-width: 10rem'>Thumbnail
+        </th>
+        <th nzColumnKey='title'
+            [nzSortFn]='true'
+            style='width: 30rem; max-width: 30rem'>Title
+        </th>
+        <th nzColumnKey='minutesRead'
+            [nzSortFn]='true'>Minutes Read
+        </th>
+        <th nzColumnKey='description'
+            [nzSortFn]='true'
+            style='width: 30rem; max-width: 30rem'>Description
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor='let post of posts'>
+        <td style='width: 10rem; max-width: 10rem'>
+            <button nz-button
+                    nzDanger
+                    nzShape='circle'
+                    class='mr-2'
+                    nz-popconfirm
+                    nzPopconfirmTitle='Are you sure delete this post?'
+                    (nzOnConfirm)='delete(post.id!)'
+                    nzPopconfirmPlacement='topRight'
+            >
+                <i nz-icon
+                   nzType='delete'></i>
+            </button>
+            <a nz-button
+               nzType='primary'
+               nzShape='circle'
+               [routerLink]="['/admin/post-edit']"
+               [queryParams]='{id: post.id}'
+            >
+                <i nz-icon
+                   nzType='edit'
+                   nzTheme='outline'></i>
+            </a>
+        </td>
+        <td style='width: 10rem; max-width: 10rem'>
+      <span class='w-12 h-12'>
+        <img nz-image
+             class='max-h-full max-w-full'
+             [nzSrc]='post.thumbnail'
+             [nzFallback]="'/assets/imgs/no-img.png'"
+        /></span>
+
+        </td>
+        <td style='width: 30rem; max-width: 30rem'>{{ post.title }}</td>
+        <td>{{ post.minutesRead }}</td>
+        <td style='width: 30rem; max-width: 30rem'>{{ post.description | truncate:50 }}</td>
+    </tr>
+    </tbody>
+</nz-table>
