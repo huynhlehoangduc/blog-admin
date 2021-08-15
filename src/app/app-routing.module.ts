@@ -10,6 +10,7 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       { path: 'post-list', loadChildren: () => import('./pages/post/post-list/post-list.module').then(m => m.PostListModule) },
+      { path: 'post-edit', loadChildren: () => import('./pages/post/post-edit/post-edit.module').then(m => m.PostEditModule) },
     ],
     canActivate: [AdminGuard]
   },
