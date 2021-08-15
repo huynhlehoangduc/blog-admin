@@ -10,6 +10,9 @@ import {
   UserOutline,
   DeleteOutline,
   FileAddOutline,
+  UnorderedListOutline,
+  SaveOutline,
+  CheckCircleTwoTone,
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -21,6 +24,9 @@ const icons = [
   UserOutline,
   DeleteOutline,
   FileAddOutline,
+  UnorderedListOutline,
+  SaveOutline,
+  CheckCircleTwoTone,
 ];
 
 @NgModule({

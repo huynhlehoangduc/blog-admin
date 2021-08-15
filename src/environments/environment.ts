@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000',
+  tinyMCEKey: 'dfurgwkncazgwgn29dwwruuzipt5wn31avynm8sv2qtv4lpf',
 };
 
 /*

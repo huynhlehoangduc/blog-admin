@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Post } from '../../../@core/interfaces/post';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { PostService } from '../../../@core/services/post.service';
@@ -6,7 +6,8 @@ import { PostService } from '../../../@core/services/post.service';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.scss']
+  styleUrls: ['./post-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostListComponent implements OnInit {
 
@@ -16,7 +17,8 @@ export class PostListComponent implements OnInit {
   pageSize = 10;
   pageIndex = 1;
 
-  constructor(private readonly postService: PostService) { }
+  constructor(private readonly postService: PostService,
+              private readonly cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.loadDataFromServer(this.pageIndex, this.pageSize, null, null, []);
@@ -42,6 +44,7 @@ export class PostListComponent implements OnInit {
       this.loading = false;
       this.posts = res.data;
       this.total = res.meta.itemCount;
+      this.cdr.detectChanges();
     });
   }
 
