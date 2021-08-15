@@ -52,7 +52,11 @@ export class PostEditComponent implements OnInit {
           this.isSpinning = false;
           this.post = post;
           this.fm.patchValue(post);
-        }, _ => this.isSpinning = false);
+          this.cdr.detectChanges();
+        }, _ => {
+          this.isSpinning = false;
+          this.cdr.detectChanges();
+        });
       } else {
         this.post = null;
         this.isSpinning = true;
@@ -104,6 +108,7 @@ export class PostEditComponent implements OnInit {
     this.isSavingDraft = true;
     this.isSpinning = true;
     this.isSaving = true;
+    this.cdr.detectChanges();
     if (this.post?.id) {
       this.postService.update(this.post.id, this.fm.value).subscribe(post => {
           this.isSavingDraft = false;
@@ -116,9 +121,11 @@ export class PostEditComponent implements OnInit {
             { nzPlacement: 'bottomRight' }
           );
           this.post = post;
+          this.cdr.detectChanges();
         },
         error => {
           this.isSavingDraft = false;
+          this.cdr.detectChanges();
         });
     } else {
       this.postService.create(this.fm.value).subscribe(post => {
@@ -133,18 +140,22 @@ export class PostEditComponent implements OnInit {
           );
           this.post = post;
           void this.router.navigate(['/post-edit'], { queryParams: { id: post.id } });
+          this.cdr.detectChanges();
         },
         _ => {
           this.isSavingDraft = false;
+          this.cdr.detectChanges();
         });
     }
   }
 
   deletePost(): void {
     this.isDeletingPost = true;
+    this.cdr.detectChanges();
     // @ts-ignore
     this.postService.delete(this.post.id).subscribe(res => {
         this.isDeletingPost = false;
+        this.cdr.detectChanges();
         this.notification.create(
           'success',
           'Success',
@@ -153,10 +164,14 @@ export class PostEditComponent implements OnInit {
         );
         void this.router.navigate(['/post-list']);
       },
-      _ => this.isDeletingPost = false);
+      _ => {
+        this.isDeletingPost = false;
+        this.cdr.detectChanges();
+      });
   }
 
   handleChangeThumbNail(info: NzUploadChangeParam): void {
+    this.cdr.detectChanges();
     switch (info.file.status) {
       case 'uploading':
         this.isUploadingThumbnail = true;

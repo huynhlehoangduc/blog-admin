@@ -40,6 +40,7 @@ export class PostListComponent implements OnInit {
     filter: Array<{ key: string; value: string[] }>
   ): void {
     this.loading = true;
+    this.cdr.detectChanges();
     this.postService.list({ params: { page: pageIndex, take: pageSize }}).subscribe(res => {
       this.loading = false;
       this.posts = res.data;
